@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Cafe</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fdfaf6;
+            color: #3c3434;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29mZmVlJTIwc2hvcCUyMGludGVyaW9yfGVufDB8fDB8fHww&ixlib=rb-4.1.0&q=60&w=3000') center/cover no-repeat;
+            color: white;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #cdec45;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1.2rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+        nav a:hover,
+        nav a.active-nav {
+            color: #72050c;
+        }
+        nav a::after {
+            content: "";
+            display: block;
+            height: 2px;
+            background: #031a45;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+        nav a:hover::after,
+        nav a.active-nav::after {
+            transform: scaleX(1);
+        }
+
+        /* Section Titles */
+        h2 {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 2rem;
+            color: #7d0707;
+            position: relative;
+        }
+        h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #52e807;
+            margin: 0.5rem auto;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+        .menu-item {
+            background: rgb(240, 212, 212);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        .menu-item h3 {
+            padding: 1rem;
+            color: #05e08c;
+        }
+        .menu-item p {
+            padding: 0 1rem;
+            font-size: 0.9rem;
+        }
+        .price {
+            padding: 1rem;
+            font-weight: bold;
+            color: #231070;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            margin: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .about-section img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .about-text {
+            flex: 1;
+        }
+
+        /* Contact Section */
+.contact-section {
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    margin: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Horizontal Info Boxes */
+.contact-info-boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 1.5rem 0;
+}
+
+.info-box {
+    flex: 1;
+    min-width: 200px;
+    background: #2b8eeb; /* matches your contact-card color */
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.info-box h3 {
+    margin-bottom: 8px;
+}
+
+.info-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Contact Card */
+.contact-card {
+    background: #2b8eeb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Form Styles */
+form input, form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+form button {
+    background: #8bc1e6;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+form button:hover {
+    background: #445f96;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+        /* Footer */
+        footer {
+            background: #4475d0;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Section Switching */
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Happy Café</h1>
+        <p>Sip, savor, and share the joy</p>
+    </header>
+
+    <nav>
+        <a href="#" class="nav-link active-nav" data-section="menu">Menu</a>
+        <a href="#" class="nav-link" data-section="about">About</a>
+        <a href="#" class="nav-link" data-section="contact">Contact</a>
+    </nav>
+
+    <!-- Sections -->
+    <section id="menu" class="section active fade-in">
+        <h2>Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Masala Chai</h3>
+                <div class="price">₹30</div>
+            </div>
+            <div class="menu-item">
+                <h3>Cappuccino</h3>
+                <div class="price">₹80</div>
+            </div>
+            <div class="menu-item">
+                <h3>Espresso</h3>
+                <div class="price">₹120</div>
+            </div>
+            <div class="menu-item">
+                <h3>Americano</h3>
+                <div class="price">₹150</div>
+            </div>
+            <div class="menu-item">
+                <h3>Green Tea</h3>
+                <div class="price">₹80</div>
+            </div>
+            <div class="menu-item">
+                <h3>Hot Chocolate</h3>
+                <div class="price">₹150</div>
+            </div>
+            <div class="menu-item">
+                <h3>Turkish Coffee	</h3>
+                <div class="price">₹200</div>
+            </div>
+            <div class="menu-item">
+                 <h3>Grilled Cheese Sandwich </h3>
+                 <div class="price">₹200</div> 
+                </div> 
+                <div class="menu-item"> 
+                    <h3>Grilled Sandwich</h3> 
+                    <div class="price">₹150</div>
+                 </div> 
+                 <div class="menu-item"> 
+                    <h3>Chicken Panini</h3>
+                     <div class="price">₹250</div>
+                     </div>
+                      <div class="menu-item"> 
+                        <h3>Veg Wra</h3> 
+                        <div class="price">₹150</div>
+                     </div>
+                     <div class="menu-item"> 
+                        <h3>Chocolate Chip Muffin</h3>
+                         <div class="price">₹100</div>
+                         </div>
+                          <div class="menu-item"> 
+                            <h3>Veggie Sandwich </h3>
+                             <div class="price">₹180</div>
+                             </div>
+           
+        </div>
+       
+    </section>
+
+    <section id="about" class="section fade-in">
+        <h2>About Us</h2>
+        <div class="about-section">
+            <div class="about-text">
+                <p>Founded in 2020, Happy Café began as a small coffee cart with a simple dream — to serve fresh, high-quality coffee and create a space where people feel truly welcome. Every cup we brew is made from carefully selected beans, roasted to perfection, and served with a smile. Our cozy, loft-inspired space is designed for everything from friendly catch-ups to quiet moments with a book. At Happy Café, it’s not just about coffee — it’s about community, connection, and creating memories. We look forward to sharing our passion with you, one cup at a time.</p>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <section class="contact-section">
+    <h2 style="text-align:center;">Contact Us</h2>
+    <p style="text-align:center;">We’d love to hear from you! Visit us or send a message.</p>
+
+    <!-- Horizontal Info Boxes -->
+    <div class="contact-info-boxes">
+        <div class="info-box">
+            <h3>📍 Visit Us</h3>
+            <p>Law gate Phagwara,Punjab</p>
+        </div>
+        <div class="info-box">
+            <h3>📞 Call Us</h3>
+            <p>+91 8922868565</p>
+        </div>
+        <div class="info-box">
+            <h3>📧 Email</h3>
+            <p>shailesh01@gmail.com</p>
+        </div>
+        <div class="info-box">
+            <h3>🕒 Hours</h3>
+            <p>Mon-Sun: 8:00 AM – 11:45 PM</p>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-card">
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+
+
+    <footer>
+        <p>Happy Café. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                sections.forEach(s => s.classList.remove('active', 'fade-in'));
+                navLinks.forEach(n => n.classList.remove('active-nav'));
+
+                const sectionId = link.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active', 'fade-in');
+                link.classList.add('active-nav');
+            });
+        });
+    </script>
+
+</body>
+</html>
